@@ -1,4 +1,4 @@
-# Learning Management System (LMS)
+# Institute Management Dashboard 
 
 Welcome to the Institute Management Dashboard repository! This repository contains the source code for a web application developed using ASP.NET Core MVC. LMS is designed to facilitate the management of courses, instructors, and trainees within an educational or training institute.
 
