@@ -45,7 +45,7 @@ Open your web browser and navigate to `http://localhost:5000`.
 
 ![Screenshot 4](https://ibb.co/yVPQ3Lp)
 
-![Screenshot 5](https://ibb.co/frVrY1T)
+![Screenshot 5](https://i.ibb.co/wpZpN02/Screenshot-2024-03-26-044638.png)
 
 ![Screenshot 6](https://ibb.co/Y06KS3S)
 
@@ -57,17 +57,3 @@ Open your web browser and navigate to `http://localhost:5000`.
 *With Admin Role*
 
 
-
-
-
-## Contributing
-
-Contributions are welcome! If you find any bugs or have suggestions for improvement, please create a new issue or submit a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-Thank you for using LMS! If you have any questions or need further assistance, feel free to contact us.
