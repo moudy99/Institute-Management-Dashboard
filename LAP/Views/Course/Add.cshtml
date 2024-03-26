@@ -1,0 +1,109 @@
+﻿@model Add_new_Course_viewModel
+@{
+    ViewData["Title"] = "Add";
+    SelectList departments = new SelectList(Model.departments, "ID", "Name");
+}
+
+
+<style>
+
+    form {
+        margin-top: 20px;
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+        padding: 20px
+    }
+
+    .navbar, footer {
+        display: none;
+    }
+
+
+    body {
+        margin: 0;
+    }
+
+    main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-height: 100vh;
+        overflow: hidden;
+    }
+
+    input:focus{
+        transition: all .2s ease-in-out;
+    }
+
+    .btn {
+        color: #fff;
+        background-color: #7f7fd5;
+        font-size: 20px;
+        font-weight: bold;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .btn:hover {
+            background-color: #5454a3;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+        }
+
+
+        span{
+            font-weight:bold;
+            color:red;
+            
+        }
+</style>
+<form style="width: 30rem;" method="post" asp-action="SaveNew" asp-controller="course">
+      @* <div asp-validation-summary="All"></div> *@
+
+    <!-- Name input -->
+    <div  class="form-outline mb-4">
+        <label asp-for="Name">Name</label>
+        <input  class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+
+    <!--  Degree input -->
+    <div class="form-outline mb-4">
+        <label class="form-label" asp-for="Degree">Degree</label>
+        <input class="form-control" asp-for="Degree" />
+        <span asp-validation-for="Degree"></span>
+
+    </div>
+
+    <!-- Min Degree input -->
+    <div  class="form-outline mb-4">
+        <label class="form-label" asp-for="MinDegree">Min Degree</label>
+        <input  class="form-control" asp-for="MinDegree" />
+       <span asp-validation-for="MinDegree"></span>
+    </div>
+
+
+    <!-- Hours input -->
+    <div  class="form-outline mb-4">
+        <label class="form-label" asp-for="CrsHours">Cours Hours</label>
+        <input  class="form-control" asp-for="CrsHours" />
+        <span asp-validation-for="CrsHours"></span>
+
+    </div>
+
+
+    <!-- Department drop down -->
+    <div class="form-outline mb-4">
+        <label class="form-label" asp-for="DepartmentId">Department</label>
+        <select  asp-items="departments" required class="form-select" asp-for="DepartmentId" >
+        <option value="" >Select Department</option>
+
+        </select>
+        <span asp-validation-for="DepartmentId"></span>
+
+    </div>
+
+    <!-- Submit button -->
+    <button  type="submit" class="display-1 btn  mb-4">Add</button>
+</form>
+<partial name="_ValidationScriptsPartial" />

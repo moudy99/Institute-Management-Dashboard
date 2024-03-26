@@ -1,0 +1,101 @@
+﻿@model All_courses_viewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<style>
+  
+
+    .navbar, footer {
+        display: none;
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px
+    }
+
+    .card {
+        box-shadow: rgba(0, 0, 0, 0.2) -3px -2px 15px 0px, rgba(0, 0, 0, 0.22) -11px 20px 7px 0px;
+        text-align: center;
+    }
+
+   
+
+    a {
+        text-decoration: none;
+    }
+
+    select{
+        text-align:center;
+    }
+
+    .btn_back {
+        background-color: #fff;
+        color: #56ab2f;
+        border: 2px solid #56ab2f;
+        transition: all 0.25s ease-in-out;
+        margin: 5px;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    .btn_back:hover {
+            background-color: #56ab2f;
+            color: #fff;
+            box-shadow: -4px 9px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        span{
+        color: #56ab2f;
+        }
+
+        li{
+           margin:10px;
+        }
+        select{
+        margin-top: 11px;
+        font-size: 20px!important;
+        font-weight: bold !important;
+        padding: 12px;
+        }
+   
+</style>
+
+
+<div class="container">
+    <div class="card fw-bold fs-4 " style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title  fw-bold">@Model.course.Name</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><span>Department:</span> @Model.course.Department.Name</li>
+            <li class="list-group-item"><span>Min Degree:</span> @Model.course.MinDegree</li>
+            <li class="list-group-item"><span>Course Hours</span> @Model.course.CrsHours</li>
+            <li class="list-group-item">
+                <span>Course Instructors</span> <br />
+                <select class="form-control ">
+                    @foreach (var crs in Model.instructors)
+                    {
+                        <option>@crs.Name</option>
+                    }
+                </select>
+
+            </li>
+
+
+        </ul>
+        <div class="card-body">
+            <a href="/course/Index" class="card-link btn btn_back">Back Main Page</a>
+        </div>
+    </div>
+
+</div>

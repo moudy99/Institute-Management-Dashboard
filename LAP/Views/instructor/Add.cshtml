@@ -1,0 +1,119 @@
+﻿@model Add_new_instructor_viewModel
+
+@{
+    ViewData["Title"] = "Add";
+}
+
+
+<style>
+    .navbar,footer{display:none;}
+    form{margin-top:20px;
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+        padding:20px
+    }
+    body{
+        margin:0;
+    }
+    main{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        max-height:100vh;
+        overflow:hidden;
+    }
+
+
+    .btn {
+        color: #fff;
+        background-color: #7f7fd5;
+        font-size: 20px;
+        font-weight:bold;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .btn:hover {
+            background-color: #5454a3;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+        }
+</style>
+
+<form style="width: 30rem;" method="post" action="/instructor/saveNew">
+    <!-- Name input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        <label class="form-label" for="Name">Name</label>
+        <input name="Name" type="text" id="Name" class="form-control" />
+    </div>
+
+    <!-- Address input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        <label class="form-label" for="Address">Address</label>
+        <input required name="Address" type="text" id="Address" class="form-control" />
+    </div>
+
+    <!-- Image URL input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        <label class="form-label" for="Image">Image URL</label>
+        <input name="Image" type="text" value="9.jpg" readonly id="Image" class="form-control" />
+    </div>
+
+
+    <!-- Salary input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        <label class="form-label" for="salary">Salary</label>
+        <input required name="salary" type="number" id="salary" class="form-control" />
+    </div>
+
+    <!-- Department dropdown -->
+    <div class="form-outline mb-4">
+        <label class="form-label" for="Department">Department</label>
+        <select required name="DepartmentID" class="form-select" id="Department" onchange="LoadEmp()">
+            <option value="" disabled selected>Select Department</option>
+            @foreach (Department department in Model.departments)
+            {
+                <option value="@department.ID"> @department.Name</option>
+            }
+        </select>
+    </div>
+
+    <!-- Course dropdown -->
+    <div class="form-outline mb-4">
+        <label class="form-label" for="Course">Course</label>
+        <select required name="CourseID" class="form-select" id="Course">
+            <option value="" disabled selected>Select Course</option>
+            @foreach(Course course in Model.courses)
+            {
+            }
+
+ 
+        </select>
+    </div>
+
+
+
+    <!-- Submit button -->
+    <button data-mdb-ripple-init type="submit" class="display-1 btn  mb-4">Submit</button>
+</form>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    function LoadEmp() {
+        const selectElm = document.querySelector('#Course');
+        selectElm.innerHTML = "";
+        
+        var deptID = $("#Department").val();
+        console.log(deptID);
+        $.ajax({
+            url: "/Instructor/ALl_Department_Courses?id=" + deptID,
+            success: function (result) {
+              
+                for (let item of result) {
+                    console.log(item);
+                
+                    selectElm.innerHTML += `<option value="${item.id}">${item.name}</option>`;
+                }
+            }
+        });
+    }
+</script>

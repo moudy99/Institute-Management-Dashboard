@@ -1,0 +1,104 @@
+﻿
+    <style>
+
+        body {
+            background: linear-gradient( to right, #f2712c, #e31b1b ); 
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin:0;
+            padding:0;
+        }
+        .container{
+           display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+        }
+
+        h1 {
+            color: white;
+        }
+
+    .navbar,footer{
+        display:none!important;
+    }
+
+    .button-container {
+            text-align: center;
+            
+        }
+
+        .button {
+            display: block; 
+            width: 80%; 
+            padding: 30px 50px; 
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+              .btn {
+                font-size:35px;
+                font-weight:bold;
+                margin-left:10px;
+                  background-color: #fff;
+                  color: #e31b1b;
+                  transition: all 0.3s ease-in-out;
+            }
+
+            .btn:hover{
+                    background-color: #e31b1b;
+                color: #fff;
+            font-size: 37px;
+            }
+                .top_btn {
+    position: absolute;
+    font-size: 27px;
+    font-weight: bold;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    margin-left: 10px;
+    transition: all .3s ease-in-out;
+    border-top: none;
+    top: 0;
+    left: 0;
+    color:white;
+    background-color:transparent;
+    }
+
+        .top_btn:hover {
+            background: white;
+            color: black;
+            box-shadow: -4px 9px 8px rgba(0, 0, 0, 0.2);
+            font-size: 27px;
+        }
+
+    </style>
+
+<a class="btn top_btn  btn-outline-light" asp-action="logout" asp-controller="Account"><i class="bi bi-list-columns-reverse"></i> Sign Out</a>
+
+    <div class="container">
+    <h1 class="display-3 fw-bold mb-5 "> Institute Management Dashboard </h1>
+        <div class="button-container">
+            <a href="/trainee/index" class="btn_show_all btn btn-lg all_trainess"> Trainees 👨‍🦽</a>
+             <a href="/instructor/index"  class="btn btn-lg all_instructors "> Instructors 🧑‍🏫</a>
+        <a href="/Course/Index" class="btn btn-lg all_courses ">Courses 💿</a>
+
+        @* ////THIs anchor for adding the rolle from the Role action in the home ,,, and i added once so i don't need this anymore' *@
+        @* <a asp-action="CreateRole" asp-controller="Home" class="btn btn-lg"  >Create Roles</a> *@
+
+        
+           @* ////THIs anchor for Change the Roles of some users and assign to them new roles .. will do it once also ' *@
+         @* <a asp-action="ChangeRoles" asp-controller="Account" class="btn btn-lg"  >Change Roles</a> *@
+        
+
+
+        </div>
+        </div>
+ 

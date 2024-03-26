@@ -1,0 +1,57 @@
+﻿
+@model Trainee_Course_Result_viewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    .navbar, footer {
+        display: none;
+    }
+    body{
+        padding:0;
+        margin:0;
+    }
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top:10px
+    }
+
+    .card {
+        box-shadow: rgba(0, 0, 0, 0.2) -3px -2px 15px 0px, rgba(0, 0, 0, 0.22) -11px 20px 7px 0px;
+        text-align:center;
+    }
+
+    .list-group-item {
+        color:@Model.color !important; 
+    }
+    a{
+        text-decoration:none;
+    }
+    img{
+        
+    }
+</style>
+
+<div class="container" >
+    <div class="card fw-bold fs-4 " style="width: 20rem;">
+        <img src="/Imgs/@Model.image" class="w-50 card-img-top " alt="Instructor Image">
+        <div class="card-body">
+            <h5 class="card-title display-6 fw-bold">@Model.TraineeName</h5>
+        </div>
+        <ul class="list-group list-group-flush" style="color:@Model.color">
+            <li class="list-group-item"><span style="color:black;">Course Name:</span>  @Model.CourseName</li>
+            <li class="list-group-item"><span style="color:black;">Course Min Degree: </span>@Model.couresMinDrgree</li>
+            <li class="list-group-item"><span style="color:black;">Trainee Degree:</span> @Model.TraineeDegree</li>
+            
+
+        </ul>
+        <div class="card-body">
+            <a href="/trainee/Index" class="card-link btn btn-outline-dark">Back Main Page</a>
+        </div>
+    </div>
+
+</div>

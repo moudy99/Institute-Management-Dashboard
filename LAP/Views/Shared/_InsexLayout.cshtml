@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+
+
+@{
+    PaginatedList pager = new PaginatedList();
+    if (ViewBag.pager != null)
+    {
+
+        pager = ViewBag.Pager;
+        int pageNo = pager.CurrentPage;
+    }
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <title>@ViewData["Title"] - LAP</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/LAP.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
+        }
+
+        .navbar,
+        footer {
+            display: none;
+        }
+
+
+
+        .btn-group > a {
+            background-color: #fff;
+            color: #7f7fd5;
+            border: 2px solid #7f7fd5;
+            transition: all 0.2s ease-in-out;
+            margin: 5px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .btn_crs:hover {
+            background-color: #7f7fd5;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: -4px 9px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-card {
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+            margin-bottom: 20px;
+        }
+
+            .course-card:hover {
+                box-shadow: -4px 9px 8px rgba(0, 0, 0, 0.3);
+                transform: translateY(2px);
+            }
+
+        .btn-group {
+            display: flex;
+        }
+
+
+        .top_btn {
+            margin-bottom: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            margin-left: 10px;
+            transition: all .3s ease-in-out;
+            border-top: none
+        }
+
+            .top_btn:hover {
+                background: white;
+                color: black;
+                box-shadow: -4px 9px 8px rgba(0, 0, 0, 0.2);
+            }
+
+
+        /* Search Bar */
+        .search_container {
+            width: fit-content;
+            float: right;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .search_container .btn {
+                background: black;
+                color: white;
+                font-size: 21px;
+                font-weight: bold;
+                transition: all .3s ease-in-out;
+            }
+
+                .search_container .btn:hover {
+                    box-shadow: -4px 9px 8px rgba(0, 0, 0, 0.2);
+                    transform: translateY(-1px);
+                }
+
+            .search_container input {
+                border-bottom-left-radius: 15px !important;
+                border-top-left-radius 15px !important;
+                font-size: 15px;
+                font-weight: 500;
+                transition: all .3s ease-in-out;
+                margin-left: 10px;
+            }
+
+                .search_container input:focus {
+                    border: none;
+                    outline: none;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                    transition: box-shadow 0.3s ease;
+                }
+
+
+        .pagination .page-item.active .page-link {
+            background-color: #7f7fd5;
+            border-color: #7f7fd5;
+            color: #fff;
+            font-weight: bolder;
+            font-size: 15px;
+            box-shadow: -3px 4px 0px rgb(0 0 0 / 28%)
+        }
+
+        .pagination a {
+            color: black;
+            font-weight: 500;
+        }
+
+
+            .pagination a:hover {
+                color: black;
+            }
+
+            .pagination a:focus {
+                z-index: 3;
+                color: black;
+                background-color: #7f7fd54d;
+                outline: 0;
+                box-shadow: none;
+            }
+
+        @@media (max-width: 767px) {
+            body {
+                overflow: auto;
+            }
+
+            .search_container {
+                display: none;
+            }
+
+            .top_btn {
+                display: none;
+            }
+
+            .pagination a {
+                color: black;
+                font-weight: 500;
+                padding: 0.275rem .55rem;
+            }
+        }
+    </style>
+
+
+</head>
+<body>
+    <div class="container">
+
+    <a href="/" class="btn top_btn btn-outline-light ">Home <i class="bi bi-house-fill"></i></a>
+    <a class="btn top_btn  btn-outline-light" href="/instructor/add"><i class="bi bi-person-plus-fill"></i> Add New Instructor</a>
+    <a class="btn top_btn  btn-outline-light" href=" /instructor/Index"><i class="bi bi-list-columns-reverse"></i> Back To Full List</a>
+        @* ///  Search Bar ==>  ///*@
+        <div class="search_container container">
+            <form asp-controller="@ViewContext.RouteData.Values["controller"]"
+                  asp-action="Index"
+                  asp-route-page="@pager.CurrentPage"
+                  method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="search" value="@ViewData["search"]">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"> <i class="bi bi-binoculars"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+
+
+    <div>
+        @RenderBody()
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

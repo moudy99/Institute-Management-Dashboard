@@ -1,0 +1,81 @@
+﻿
+    <style>
+        body {
+            background: linear-gradient( to right, #f2712c, #e31b1b ); 
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin:0;
+            padding:0;
+        }
+        .container{
+           display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+        }
+
+        h1 {
+            color: white;
+        }
+
+    .navbar,footer{
+        display:none!important;
+    }
+
+    .button-container {
+            text-align: center;
+            
+        }
+
+        .button {
+            display: block; 
+            width: 80%; 
+            padding: 30px 50px; 
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+              .btn {
+                font-size:35px;
+                font-weight:bold;
+                margin-left:10px;
+                  background-color: #fff;
+                  color: #e31b1b;
+                  transition: all 0.3s ease-in-out;
+            }
+
+            .btn:hover{
+                    background-color: #e31b1b;
+                color: #fff;
+            font-size: 37px;
+            }
+
+
+    </style>
+
+
+    <div class="container">
+            <h1 class="display-1">ℹTℹ️ Dashboard </h1>
+        <div class="button-container">
+            <a href="/trainee/index" class="btn_show_all btn btn-lg all_trainess"> Trainees 👨‍🦽</a>
+        <a href="/Course/Index" class="btn btn-lg all_courses ">Courses 💿</a>
+        @if (User.IsInRole("Admin"))
+        {
+        <a href="/instructor/index"  class="btn btn-lg all_instructors "> Instructors 🧑‍🏫</a>
+            
+        }
+        <a asp-action="Register" asp-controller="Account" class="btn btn-lg all_courses ">CREATE ACCOUNT 🏬</a>
+
+
+
+
+        </div>
+        </div>
+ 

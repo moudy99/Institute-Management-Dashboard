@@ -1,0 +1,147 @@
+﻿@model LAP.ViewModel.Login_viewModel
+
+@{
+    ViewData["Title"] = "Login";
+
+}
+
+<style>
+    .navbar, footer {
+        display: none
+    }
+
+    body {
+        background: linear-gradient(to right, #f2712c, #e31b1b);
+        max-height: 100vh;
+        overflow: hidden;
+    }
+
+    main {
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        width: 500px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="password"],
+    .form-group input[type="email"],
+    .form-group select {
+        background-color: rgba(255, 255, 255, 0.5);
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        width: 100%;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+    }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="password"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group select:focus {
+            background-color: rgba(255, 255, 255, 0.8);
+            outline: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+    .form-group input[type="submit"] {
+        background-color: #f2712c;
+        border: none;
+        border-radius: 10px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 15px;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #e31b1b;
+        }
+
+    .login-link {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .login-link a {
+            color: #f2712c;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+            .login-link a:hover {
+                color: #e31b1b;
+            }
+
+    .form-check{
+        margin-bottom:10px;
+        font-weight:bold;
+    }
+</style>
+
+<div class="card">
+    <h1>Login</h1>
+    <hr />
+    <div class="row">
+        <div class="">
+            <form asp-action="Login">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <input asp-for="UserName" class="form-control" placeholder="Username" />
+                    @* <span asp-validation-for="UserName" class="text-danger"></span> *@
+                </div>
+                <div class="form-group">
+                    <input asp-for="Password" class="form-control" type="password" placeholder="Password" />
+                    @* <span asp-validation-for="Password" class="text-danger"></span> *@
+                </div>
+
+                <div class="form-group">
+                    <select asp-for="Role" class="form-control">
+                        <option value="">Select Role</option>
+                        @foreach (var role in ViewBag.Roles)
+                        {
+                            <option value="@role.Name">@role.Name</option>
+                        }
+                    </select>
+
+                    @* <span asp-validation-for="Type" class="text-danger"></span> *@
+                </div>
+                <div class=" form-group form-check ">
+                    <label class="form-check-label">
+                        <input class="form-check-input " asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" asp-action="checkLogin"  value="Login" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="login-link">
+        <a asp-action="Register">Register</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

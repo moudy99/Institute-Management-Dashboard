@@ -1,0 +1,366 @@
+﻿@model Trainee_courses_name_viewModel
+@{
+    ViewData["Title"] = "Index";
+    int traineer_id = 0;
+    int course_id = 0;
+
+    PaginatedList pager = new PaginatedList();
+    if (ViewBag.pager != null)
+    {
+
+        pager = ViewBag.Pager;
+        int pageNo = pager.CurrentPage;
+    }
+}
+
+
+
+<style>
+    .navbar, footer {
+        display: none;
+    }
+
+    body {
+        background: linear-gradient( to right, #f2712c, #e31b1b );
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .trainee-card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+        width: calc(33.33% - 20px);
+        transition: box-shadow 0.3s ease;
+    }
+
+        .trainee-card:hover {
+            box-shadow: -8px 14px 5px rgb(0 0 0 / 31%);
+        }
+
+
+
+
+    .trainee-name {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333333;
+    }
+
+    .course-select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        justify-content: center;
+        align-items: center
+    }
+
+        .action-buttons a {
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .action-buttons a:hover {
+            }
+
+    .btn_view_degree {
+        background-color: #fff;
+        color: #e31b1b;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .btn_view_degree:hover {
+            background-color: #e31b1b;
+            color: #fff;
+        }
+
+    .all_results {
+        background-color: #fff;
+        color: #f2712c;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .all_results:hover {
+            background-color: #f2712c;
+            color: #fff;
+        }
+
+    .Edit {
+        background-color: #fff;
+        color: #982323;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .Edit:hover {
+            background-color: #982323;
+            color: #fff;
+        }
+
+    .delete {
+        background-color: white;
+        color: black;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .delete:hover {
+            background-color: black;
+            color: #fff;
+        }
+
+
+
+    @@media (max-width: 992px) {
+        .trainee-card {
+            width: calc(50% - 20px);
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .trainee-card {
+            width: calc(100% - 20px);
+        }
+    }
+
+    .top_btn {
+        margin-bottom: 50px;
+        font-size: 20px;
+        font-weight: bold;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        margin-left: 10px;
+        transition: all .3s ease-in-out;
+    }
+
+        .top_btn:hover {
+            background: white;
+            color: black;
+            box-shadow: -4px 9px 8px rgba(0, 0, 0, 0.2);
+        }
+
+
+    /* Search Bar */
+    .search_container {
+        width: fit-content;
+        float: right;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .search_container .btn {
+            background: black;
+            color: white;
+            font-size: 21px;
+            font-weight: bold;
+            transition: all .3s ease-in-out;
+        }
+
+            .search_container .btn:hover {
+                box-shadow: -4px 9px 8px rgba(0, 0, 0, 0.2);
+                transform: translateY(-1px);
+            }
+
+        .search_container input {
+            border-bottom-left-radius: 15px !important;
+            border-top-left-radius 15px !important;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all .3s ease-in-out;
+            margin-left: 10px;
+        }
+
+            .search_container input:focus {
+                border: none;
+                outline: none;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                transition: box-shadow 0.3s ease;
+            }
+
+
+    .pagination .page-item.active .page-link {
+        background-color: #e31b1b;
+        border-color: #7f7fd5;
+        color: #fff;
+        font-weight: bolder;
+        font-size: 15px;
+        box-shadow: -3px 4px 0px rgb(0 0 0 / 28%)
+    }
+
+    .pagination a {
+        color: black;
+        font-weight: 500;
+    }
+
+
+        .pagination a:hover {
+            color: black;
+        }
+
+        .pagination a:focus {
+            z-index: 3;
+            color: black;
+            background-color: #e31b1b12;
+            outline: 0;
+            box-shadow: none;
+        }
+
+    @@media (max-width: 767px) {
+
+
+        .search_container {
+            display: none;
+        }
+
+        .top_btn {
+            display: none;
+        }
+
+        .pagination a {
+            color: black;
+            font-weight: 500;
+            padding: 0.275rem .55rem;
+        }
+
+        .container {
+            justify-content: center;
+        }
+
+    }
+
+    .welcome {
+        background: white;
+        color: black;
+        box-shadow: -3px 4px 0px rgba(0, 0, 0, 0.2);
+        margin-bottom: 50px;
+        font-size: 17px;
+        font-weight: bold;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        margin-left: 10px;
+        transition: all .3s ease-in-out;
+        border-top: none;
+        cursor: default !important;
+        pointer-events: none;
+    }
+</style>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+<a href="/Home/Landing" class="btn top_btn btn-outline-light ">Home <i class="bi bi-house-fill"></i></a>
+@if (User.IsInRole("Admin") || User.IsInRole("Instructor"))
+{
+<a class="btn top_btn  btn-outline-light" href="/trianee/add"><i class="bi bi-person-plus-fill"></i> Add New Trainee</a>
+    
+}
+<a class="btn top_btn  btn-outline-light" ><i class="bi bi-list-columns-reverse"></i> Back To Full List</a>
+<a class="btn top_btn  btn-outline-light" asp-action="logout" asp-controller="Account"><i class="bi bi-list-columns-reverse"></i> Sign Out</a>
+
+
+<button class="btn top_btn  btn-outline-light welcome "  ><i class="bi bi-emoji-smile-fill"></i> Welcome, @User.Identity.Name</button>
+
+
+
+
+<div class="search_container container">
+    <form asp-action="Index" asp-controller="trainee" asp-route-page="@pager.CurrentPage" method="get">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="search" value="@ViewData["search"]">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"> <i class="bi bi-binoculars"></i></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+
+
+    @foreach (var trainee in Model.trainees)
+    {
+        <div class="trainee-card">
+            <div class="trainee-name">@trainee.Name</div>
+            <div class="course">
+                <select class="form-control course-select">
+                    @foreach (var crs in Model.CourseSelector(trainee.ID))
+                    {
+                        course_id = crs.ID;
+
+                        <option value="@crs.ID">@crs.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="action-buttons">
+                <a href="/trainee/details?crs_id=@course_id&train_id=@trainee.ID" class="btn_view_degree btn">View Degree</a>
+                <a href="/trainee/TraineeResults?id=@trainee.ID" class="all_results btn">View All Courses</a>
+                @if (User.IsInRole("Admin") || User.IsInRole("Instructor"))
+                {
+                <a href="#" class="Edit btn">Edit</a>
+                    
+                <a href="" class="delete btn">Delete</a>
+                }
+
+            </div>
+            <input type="hidden" class="trainee-id" value="@trainee.ID" />
+        </div>
+    }
+
+
+
+</div>
+@if (pager.TotalPages > 1)
+{
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+            @* ///////  Previous *@
+            <li class="page-item @(pager.HasPreviousPage ? "" : "disabled")">
+                <a class="page-link" asp-action="Index" asp-controller="trainee" asp-route-page="@(pager.CurrentPage - 1)" aria-label="Previous" asp-route-search="@ViewData["search"]">
+                    <span aria-hidden="true">Previous</span>
+                </a>
+            </li>
+
+            @for (int pg = pager.StartPage; pg <= pager.EndPage; pg++)
+            {
+                <li class="page-item @(pg == pager.CurrentPage ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-controller="trainee" asp-route-page="@pg" asp-route-search="@ViewData["search"]">
+                        @pg
+                    </a>
+                </li>
+            }
+
+
+            @* ////// Next => *@
+            <li class="page-item @(pager.HasNextPage ? "" : "disabled")">
+                <a class="page-link" asp-action="Index" asp-controller="trainee" asp-route-page="@(pager.CurrentPage + 1)" aria-label="Next" asp-route-search="@ViewData["search"]">
+                    <span aria-hidden="true">Next</span>
+                </a>
+            </li>
+
+
+
+        </ul>
+    </nav>
+}

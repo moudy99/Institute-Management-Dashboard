@@ -1,0 +1,312 @@
+﻿
+ @model List<Instructor>
+@{
+    ViewData["Title"] = "Index";
+
+    PaginatedList pager = new PaginatedList();
+    if (ViewBag.pager != null)
+    {
+
+         pager = ViewBag.Pager;
+        int pageNo = pager.CurrentPage;
+    }
+}
+
+<style>
+    body {
+        background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
+    }
+
+    .navbar,
+    footer {
+        display: none;
+    }
+
+    
+
+    .btn-group > a {
+        background-color: #fff;
+        color: #7f7fd5;
+        border: 2px solid #7f7fd5;
+        transition: all 0.2s ease-in-out;
+        margin: 5px;
+        font-size: 1.2rem;
+        font-weight: 700;
+         
+       
+    }
+
+        .btn_crs:hover {
+            background-color: #7f7fd5;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: -4px 9px 8px rgba(0, 0, 0, 0.1);
+        }
+
+    .course-card {
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+        margin-bottom: 20px;
+    }
+
+        .course-card:hover {
+            box-shadow: -4px 9px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(2px);
+        }
+    .btn-group {
+        display: flex;
+    }
+
+
+    .top_btn {
+        margin-bottom: 50px;
+        font-size: 17px;
+        font-weight: bold;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        margin-left: 10px;
+        transition: all .3s ease-in-out;
+        border-top: none
+    }
+
+        .top_btn:hover {
+            background: white;
+            color: black;
+            box-shadow: -4px 9px 8px rgba(0, 0, 0, 0.2);
+        }
+
+
+    /* Search Bar */
+    .search_container {
+        width: fit-content;
+        float: right;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .search_container .btn {
+            background: black;
+            color: white;
+            font-size: 21px;
+            font-weight: bold;
+            transition: all .3s ease-in-out;
+        }
+
+            .search_container .btn:hover {
+                box-shadow: -4px 9px 8px rgba(0, 0, 0, 0.2);
+                transform: translateY(-1px);
+            }
+
+        .search_container input {
+            border-bottom-left-radius: 15px !important;
+            border-top-left-radius 15px !important;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all .3s ease-in-out;
+            margin-left: 10px;
+        }
+
+            .search_container input:focus {
+                border: none;
+                outline: none;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                transition: box-shadow 0.3s ease;
+            }
+
+
+    .pagination .page-item.active .page-link {
+        background-color: #7f7fd5;
+        border-color: #7f7fd5;
+        color: #fff;
+        font-weight: bolder;
+        font-size: 15px;
+        box-shadow: -3px 4px 0px rgb(0 0 0 / 28%)
+    }
+
+    .pagination a {
+        color: black;
+        font-weight: 500;
+    }
+
+
+        .pagination a:hover {
+            color: black;
+        }
+
+        .pagination a:focus {
+            z-index: 3;
+            color: black;
+            background-color: #7f7fd54d;
+            outline: 0;
+            box-shadow: none;
+        }
+
+    @@media (max-width: 767px) {
+        body {
+            overflow: auto;
+        }
+
+        .search_container {
+            display: none;
+        }
+
+        .top_btn {
+            display: none;
+        }
+
+        .pagination a {
+            color: black;
+            font-weight: 500;
+            padding: 0.275rem .55rem;
+        }
+    }
+
+
+
+    .welcome{
+        background: white;
+        color: black;
+        box-shadow: -3px 4px 0px rgba(0, 0, 0, 0.2);
+        margin-bottom: 50px;
+        font-size: 17px;
+        font-weight: bold;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        margin-left: 10px;
+        transition: all .3s ease-in-out;
+        border-top: none;
+        cursor:default !important;
+        pointer-events: none;
+    }
+</style>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+
+<a href="/Home/Landing" class="btn top_btn btn-outline-light ">Home <i class="bi bi-house-fill"></i></a>
+
+@if (User.IsInRole("Admin"))
+{
+<a class="btn top_btn  btn-outline-light" href="/instructor/add"><i class="bi bi-person-plus-fill"></i> Add New Instructor</a>
+    
+}
+<a class="btn top_btn  btn-outline-light" href=" /instructor/Index"><i class="bi bi-list-columns-reverse"></i> Back To Full List</a>
+<a class="btn top_btn  btn-outline-light" asp-action="logout" asp-controller="Account"><i class="bi bi-list-columns-reverse"></i> Sign Out</a>
+<button class="btn top_btn  btn-outline-light welcome "><i class="bi bi-emoji-smile-fill"></i> Welcome, @User.Identity.Name</button>
+
+<div class="search_container container">
+    <form asp-action="Index" asp-controller="instructor" asp-route-page="@pager.CurrentPage" method="get">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="search">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"> <i class="bi bi-binoculars"></i></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+    <div class="container">
+        @* <a target="_blank" class="btn btn_new_instructor rounded-2" href="/instructor/Add">Add New Instructor</a> *@
+    <div class="row instructor-container ">
+            @foreach (var instructor in Model)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card course-card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">@instructor.Name</h5>
+                        <p><span class="fw-bold">Department:</span> <br />@instructor.Department.Name </p>
+                            <div class="btn-group" role="group" aria-label="Card Buttons">
+                            <a href="/instructor/details?id=@instructor.Id" class="btn btn_crs btn-course-action">View Details</a>
+                            @if (User.IsInRole("Admin") )
+                            {
+                                 <a href="/instructor/edit/@instructor.Id" class="btn btn_crs btn-course-action">Edit</a>
+                               
+                                <a href="/instructor/delete/@instructor.Id" class="btn btn_crs btn-course-action">Delete</a>
+                                    
+                               
+                            }
+                                <input type="hidden" value="@instructor.Id" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+@* Pagination ==>  *@
+    </div>
+@if (pager.TotalPages > 1)
+{
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+            @* ///////  Previous *@
+            <li class="page-item @(pager.HasPreviousPage ? "" : "disabled")">
+                <a class="page-link" asp-action="Index" asp-controller="instructor" asp-route-page="@(pager.CurrentPage - 1)" aria-label="Previous" asp-route-search="@ViewData["search"]">
+                    <span aria-hidden="true">Previous</span>
+                </a>
+            </li>
+
+            @for (int pg = pager.StartPage; pg <= pager.EndPage; pg++)
+            {
+                <li class="page-item @(pg == pager.CurrentPage ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-controller="instructor" asp-route-page="@pg" asp-route-search="@ViewData["search"]">
+                        @pg
+                    </a>
+                </li>
+            }
+
+            @* ////// Next => *@
+            <li class="page-item @(pager.HasNextPage ? "" : "disabled")">
+                <a class="page-link" asp-action="Index" asp-controller="instructor" asp-route-page="@(pager.CurrentPage + 1)" aria-label="Next" asp-route-search="@ViewData["search"]">
+                    <span aria-hidden="true">Next</span>
+                </a>
+            </li>
+
+
+
+        </ul>
+    </nav>
+}
+                        <script src="/lib/microsoft-signalr/signalr.min.js"></script>
+                        <script>
+                              var isAdmin = @Json.Serialize(User.IsInRole("Admin"));
+                            //1)Define Connection =-->
+                            const connection = new signalR.HubConnectionBuilder().withUrl('/add-instructor').build();
+                            //2) Start Connection ==>
+                                connection.start().then(() => {
+                                    console.log("SignalR connection  successfully.");
+                                }).catch((err) => {
+                                    console.error("Error in SignalR connection:", err);
+                                });
+
+
+                            //3)Consume the data ==>
+                                connection.on("new-instructor-added", instructor => {
+                                    const html = `
+                                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                                            <div class="card course-card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title fw-bold">${instructor.Name}</h5>
+                                                    <p><span class="fw-bold">Department:</span> <br />${instructor.Department.Name}</p>
+                                                    <div class="btn-group" role="group" aria-label="Card Buttons">
+                                                        <a href="/instructor/details?id=${instructor.Id}" class="btn btn_crs btn-course-action">View Details</a>`;
+                                    if (isAdmin) {
+                                        html += `
+                                                        <a href="/instructor/edit/${instructor.Id}" class="btn btn_crs btn-course-action">Edit</a>
+                                                        <a href="/instructor/delete/${instructor.Id}" class="btn btn_crs btn-course-action">Delete</a>`;
+                                    }
+                                    html += `
+                                                        <input type="hidden" value="${instructor.Id}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `;
+                                    $(".instructor-container").append(html);
+                                });
+
+                        </script>
