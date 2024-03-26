@@ -36,24 +36,24 @@ Open your web browser and navigate to `http://localhost:5000`.
 
 ## Screenshots
 
-![Screenshot 1](https://ibb.co/0f3Nmt6)
+![Screenshot 1](https://i.ibb.co/P58pFQP/Screenshot-2024-03-26-044422.png)
 
 
-![Screenshot 2](https://ibb.co/KhGpfNT)
+![Screenshot 2](https://i.ibb.co/gRFBK5m/Screenshot-2024-03-26-044608.png)
 
-![Screenshot 3](https://ibb.co/Z6TLFHr)
+![Screenshot 3](https://i.ibb.co/1QntPsF/Screenshot-2024-03-26-044447.png)
 
-![Screenshot 4](https://ibb.co/yVPQ3Lp)
+![Screenshot 4](https://i.ibb.co/3yhrjfb/Screenshot-2024-03-26-044502.png)
 
-![Screenshot 5](https://i.ibb.co/wpZpN02/Screenshot-2024-03-26-044638.png)
+![Screenshot 5](https://i.ibb.co/zNx4kKF/Screenshot-2024-03-26-044543.png)
 
-![Screenshot 6](https://ibb.co/Y06KS3S)
+![Screenshot 6](https://i.ibb.co/DrN6FtF/Screenshot-2024-03-26-044631.png)
 
-![Screenshot 7](https://ibb.co/jvtZm50)
+![Screenshot 7](https://i.ibb.co/Gvm3yJY/Screenshot-2024-03-26-044649.png)
 
-![Screenshot 8](https://ibb.co/HqbBHNJ)
+![Screenshot 8](https://i.ibb.co/N7Rfq5W/Screenshot-2024-03-26-044719.png)
 
-![Screenshot 9](https://ibb.co/Rg8pBwY)
+![Screenshot 9](https://i.ibb.co/p1qvRFb/Screenshot-2024-03-26-044731.png)
 *With Admin Role*
 
 
